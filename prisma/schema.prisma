@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "cargo prisma"
+  output        = "../src/db.rs"
+  // module_path   = "generate_prisma"
+  // client_format = "folder"
+}
+
+datasource db {
+  // provider = "sqlite"
+  // provider = "mysql"
+  provider = "postgres"
+  url = "postgresql://postgres:123456@localhost:5432/livstyle?schema=public&connection_limit=48&timeout=60000"
+  // url      = "file:dev.db"
+}
+
+/// 用户表
+model SystemUser {
+  id              Int               @id @default(autoincrement())
+  /// 账户名称
+  username        String            @unique
+  /// 用户昵称
+  nickname        String            @default("")
+  /// 角色ID
+  role_id         Int?
+  /// 部门ID
+  dept_id         Int?
+  /// 手机号
+  phone           String            @default("")
+  /// 邮箱
+  email           String            @default("")
+  /// 性别
+  sex             Int               @default(1)
+  /// 账户密码
+  password        String            @default("")
+  /// 账户密码salt
+  salt            String            @default("")
+  /// 用户描述
+  describe        String            @default("")
+  /// 账户过期
+  expire_time     DateTime?
+  /// 用户状态
+  status          Int               @default(0)
+  last_login_ip   String            @default("")
+  last_login_time DateTime?
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @updatedAt
+  deleted_at      DateTime?
+
+  // @@map("system_users")
+}
+
+

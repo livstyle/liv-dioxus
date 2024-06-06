@@ -1,0 +1,48 @@
+[package]
+name = "liv-dioxus"
+version = "0.1.0"
+authors = ["姜坤 <jiangkun@sanheng.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace]
+members = [
+    "prisma/prisma_cli",
+    "."
+]
+
+[dependencies]
+dioxus = { version = "0.5", features = ["fullstack", "router"] }
+dioxus-fullstack = { version = "0.5.2" }
+
+
+dioxus-web = { version = "0.5", features = ["hydrate"], optional = true }
+
+axum = { version = "0.7.5", optional = true }
+tokio = { version = "1.38.0", features = ["full"], optional = true }
+
+prisma-client-rust = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.11", default-features = false, features = [
+    "migrations",
+    "postgresql",
+], optional = true }
+
+
+serde = "1.0.159"
+execute = "0.2.12"
+anyhow = "1.0.71"
+
+[features]
+default = ["server"]
+server = ["axum", "tokio", "dioxus-fullstack/axum", "prisma-client-rust"]
+web = ["dioxus-web"]
+
+
+[profile.release]
+opt-level = "z"
+debug = false
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+incremental = false

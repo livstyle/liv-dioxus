@@ -12,7 +12,7 @@ datasource db {
   // provider = "sqlite"
   // provider = "mysql"
   provider = "postgres"
-  url = "postgresql://postgres:123456@localhost:5432/livstyle?schema=public&connection_limit=48&timeout=60000"
+  url = "postgresql://postgres:123456@192.168.0.106:5432/livstyle?schema=public&connection_limit=48&timeout=60000"
   // url      = "file:dev.db"
 }
 

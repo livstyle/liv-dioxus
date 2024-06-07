@@ -13,6 +13,6 @@ Launch the Dioxus Fullstack app:
 ```bash
 cargo prisma migrate dev
 cargo prisma generate
-dx build --release --features web
+rm -rf dist && dx build --release --features web
 cargo run --release --features server
 ```

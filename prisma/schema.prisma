@@ -12,13 +12,14 @@ datasource db {
   // provider = "sqlite"
   // provider = "mysql"
   provider = "postgres"
-  url = "postgresql://postgres:123456@192.168.0.106:5432/livstyle?schema=public&connection_limit=48&timeout=60000"
+  // url = "postgresql://postgres:123456@192.168.0.106:5432/livstyle?schema=public&connection_limit=48&timeout=60000"
+  url = "postgresql://postgres:123456@localhost:5432/livstyle?schema=public&connection_limit=48&timeout=60000"
   // url      = "file:dev.db"
 }
 
 /// 用户表
 model SystemUser {
-  id              Int               @id @default(autoincrement())
+  id              BigInt               @id @default(autoincrement())
   /// 账户名称
   username        String            @unique
   /// 用户昵称
@@ -47,9 +48,121 @@ model SystemUser {
   last_login_time DateTime?
   created_at      DateTime          @default(now())
   updated_at      DateTime          @updatedAt
+  deleted         Boolean           @default(false)
   deleted_at      DateTime?
 
-  // @@map("system_users")
+  @@map("system_users")
+}
+
+/// 角色表
+model SystemRole {
+  id          Int               @id @default(autoincrement())
+  /// 角色名称
+  name        String            @unique
+  /// 角色描述
+  describe    String            @default("")
+  /// 角色状态
+  status      Int               @default(0)
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+  deleted         Boolean           @default(false)
+
+  @@map("system_roles")
 }
 
 
+/// 部门表
+model SystemDept {
+  id          Int               @id @default(autoincrement())
+  /// 部门名称
+  name        String            @unique
+  /// 部门描述
+  describe    String            @default("")
+  /// 部门状态
+  status      Int               @default(0)
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+  deleted         Boolean           @default(false)
+
+  @@map("system_depts")
+}
+
+/// 菜单表
+model SystemMenu {
+  id          Int               @id @default(autoincrement())
+  /// 菜单名称
+  name        String            @unique
+  /// 菜单图标
+  icon        String            @default("")
+  /// 菜单路径
+  path        String            @default("")
+  /// 菜单组件
+  component    String            @default("")
+  /// 菜单状态
+  status      Int               @default(0)
+  /// 菜单排序
+
+  deleted         Boolean           @default(false)
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+
+  @@map("system_menus")
+}
+
+/// 品牌表
+model GoodsBrand {
+  id          BigInt               @id @default(autoincrement())
+  /// 品牌名称
+  name        String            @unique
+  /// 英文名
+  en_name    String            @default("")
+  /// 品牌描述
+  describe    String            @default("")
+  /// 品牌状态
+  status      Int               @default(0)
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+  deleted     Boolean           @default(false)
+  logo        String? // 品牌圖片
+  sort        Int? // 品牌排序
+  /// 品牌類型
+  brand_type  String? // 品牌類型 品牌全路徑
+  
+  @@map("system_brands")
+}
+
+/// 商品類目表
+model GoodsCategory {
+  id          BigInt            @id @default(autoincrement())
+  /// 类目名称
+  name        String            @unique
+  /// 类目描述
+  describe    String            @default("")
+  /// 类目状态
+  status      Int               @default(0)
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+  deleted     Boolean           @default(false)
+  /// 类目排序
+  sort        Int? // 类目排序
+  /// 类目类型
+  category_type  String? // 类目类型
+  /// 类目层级
+  level        Int? // 类目层级
+  /// 类目父ID
+  parent_id   Int? // 类目父ID
+  /// 类目父ID
+  parent_ids  String? // 类目父ID
+  /// 类目路径
+  path        String? // 类目路径
+  
+  @@map("goods_categories")
+}
+
+/// 商品表 BigInt
+// model Goods 

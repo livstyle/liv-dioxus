@@ -3,6 +3,9 @@
 #[cfg(feature = "server")]
 mod db;
 
+#[cfg(feature = "server")]
+mod api;
+
 use std::{marker::PhantomData, sync::Arc};
 
 use dioxus::prelude::*;
@@ -37,35 +40,36 @@ fn main() {
         tokio::runtime::Runtime::new()
             .unwrap()
             .block_on(async move {
-                let prisma_client: db::PrismaClient = db::new_client().await.unwrap();
+                
+                // let prisma_client: db::PrismaClient = db::new_client().await.unwrap();
 
-                #[axum::debug_handler]
-                async fn handler(State(state): State<db::PrismaClient>) -> Json<Option<db::system_user::Data>> {
-                    let prisma = state.clone();
-                    let first = prisma.system_user().find_first(vec![])
-                        .exec().await.unwrap();
-                    match first {
-                        Some(user) => {
-                            println!("{:?}", user);
-                            Json(Some(user))
-                        }
-                        None => {
-                            println!("No user found");
-                            Json(None)
-                        }
-                    }
-                }
-                let apis = Router::new()
-                    .route("/data", get(handler))
-                    ;
+                // #[axum::debug_handler]
+                // async fn handler(State(state): State<db::PrismaClient>) -> Json<Option<db::system_user::Data>> {
+                //     let prisma = state.clone();
+                //     let first = prisma.system_user().find_first(vec![])
+                //         .exec().await.unwrap();
+                //     match first {
+                //         Some(user) => {
+                //             println!("{:?}", user);
+                //             Json(Some(user))
+                //         }
+                //         None => {
+                //             println!("No user found");
+                //             Json(None)
+                //         }
+                //     }
+                // }
+                // let apis = Router::new()
+                //     .route("/data", get(handler))
+                //     ;
 
                 // let app_state: AppState<db::PrismaClient> = AppState {
                 //     client: Arc::new(prisma_client),
                 // };
                 // build our application with some routes
                 let app = Router::new()
-                    .nest("/apis", apis)
-                    .with_state(prisma_client)
+                    // .nest("/apis", apis)
+                    // .with_state(prisma_client)
                     // Server side render the application, serve static assets, and register server functions
                     .serve_dioxus_application(ServeConfig::builder().build(), || {
                         VirtualDom::new(App)
@@ -133,10 +137,20 @@ fn Home() -> Element {
 #[server(PostServerData)]
 async fn post_server_data(data: String) -> Result<(), ServerFnError> {
     println!("Server received: {}", data);
+    let headers: axum::http::HeaderMap = extract().await?;
+    println!("{:?}", headers);
     Ok(())
 }
 
 #[server(GetServerData)]
 async fn get_server_data() -> Result<String, ServerFnError> {
+    let headers: axum::http::HeaderMap = extract().await?;
+    println!("{:?}", headers[axum::http::header::USER_AGENT]);
     Ok("Hello from the server!".to_string())
+}
+
+#[server(name = SomeStructName, endpoint = "my_fn_111")]
+async fn wwww(data: String) -> Result<String, ServerFnError> {
+    
+    Ok("wwww".to_string())
 }

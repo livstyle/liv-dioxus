@@ -11,6 +11,9 @@ use std::{marker::PhantomData, sync::Arc};
 use dioxus::prelude::*;
 use dioxus_fullstack::prelude::*;
 
+// #[cfg(feature = "web")]
+mod npay;
+
 #[derive(Clone)]
 pub struct AppState<T> {
     client: Arc<T>,
@@ -130,6 +133,7 @@ fn Home() -> Element {
                 "Get Server Data"
             }
             p { "Server data: {text}"}
+            npay::view::Main {}
         }
     }
 }

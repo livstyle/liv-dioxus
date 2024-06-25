@@ -8,6 +8,6 @@ pub fn t () {
 
 
 #[server(name = SomeStructName, endpoint = "mobile/user")]
-pub async fn user(data: String) -> Result<String, ServerFnError> {
+pub async fn user() -> Result<String, ServerFnError> {
     Ok("wwww".to_string())
 }

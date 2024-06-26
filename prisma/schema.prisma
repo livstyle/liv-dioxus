@@ -164,5 +164,10 @@ model GoodsCategory {
   @@map("goods_categories")
 }
 
+model PaymentRecord {
+  id          BigInt            @id @default(autoincrement())
+  amount      BigInt            @default(0)  // 单位是分
+}
+
 /// 商品表 BigInt
 // model Goods 

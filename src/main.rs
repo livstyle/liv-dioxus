@@ -6,16 +6,18 @@ mod db;
 #[cfg(feature = "server")]
 mod api;
 
-use std::{marker::PhantomData, sync::Arc};
+use std::{marker::PhantomData, sync::{Arc}};
+
+#[cfg(feature = "server")]
+use tokio::sync::Mutex;
 
 use dioxus::prelude::*;
 use dioxus_fullstack::prelude::*;
 
-// #[cfg(feature = "web")]
 mod npay;
 
-#[derive(Clone)]
-pub struct AppState<T> {
+
+pub struct AppStateE<T> {
     client: Arc<T>,
 }
 
@@ -25,6 +27,12 @@ enum Route {
     Home {},
     #[route("/blog/:id")]
     Blog { id: i32 },
+}
+
+#[cfg(feature = "server")]
+#[derive(Clone)]
+pub struct AppState {
+    pub db: Arc<Mutex<db::PrismaClient>>,
 }
 
 fn main() {
@@ -37,47 +45,26 @@ fn main() {
     {
         use axum::routing::*;
         use axum::response::Html;
-        use axum::extract::State;
+        use axum::extract::{State, Extension};
         use axum::Json;
 
         tokio::runtime::Runtime::new()
             .unwrap()
             .block_on(async move {
-                
-                // let prisma_client: db::PrismaClient = db::new_client().await.unwrap();
+                let prisma_client: db::PrismaClient = db::new_client().await.unwrap();
+                let app_state = AppState {
+                    db: Arc::new(Mutex::new(prisma_client)),
+                };
 
-                // #[axum::debug_handler]
-                // async fn handler(State(state): State<db::PrismaClient>) -> Json<Option<db::system_user::Data>> {
-                //     let prisma = state.clone();
-                //     let first = prisma.system_user().find_first(vec![])
-                //         .exec().await.unwrap();
-                //     match first {
-                //         Some(user) => {
-                //             println!("{:?}", user);
-                //             Json(Some(user))
-                //         }
-                //         None => {
-                //             println!("No user found");
-                //             Json(None)
-                //         }
-                //     }
-                // }
-                // let apis = Router::new()
-                //     .route("/data", get(handler))
-                //     ;
-
-                // let app_state: AppState<db::PrismaClient> = AppState {
-                //     client: Arc::new(prisma_client),
-                // };
                 // build our application with some routes
                 let app = Router::new()
-                    // .nest("/apis", apis)
-                    // .with_state(prisma_client)
+                    // .with_state(app_state)
                     // Server side render the application, serve static assets, and register server functions
                     .serve_dioxus_application(ServeConfig::builder().build(), || {
                         VirtualDom::new(App)
                     })
                     .await
+                    .layer(Extension(app_state))
                     ;
     
                 // run it
@@ -151,10 +138,4 @@ async fn get_server_data() -> Result<String, ServerFnError> {
     let headers: axum::http::HeaderMap = extract().await?;
     println!("{:?}", headers[axum::http::header::USER_AGENT]);
     Ok("Hello from the server!".to_string())
-}
-
-#[server(name = SomeStructName, endpoint = "my_fn_111")]
-async fn wwww(data: String) -> Result<String, ServerFnError> {
-    
-    Ok("wwww".to_string())
 }

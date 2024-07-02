@@ -34,9 +34,10 @@ anyhow = "1.0.71"
 reqwest = { version = "0.12.5", features = ["json"] }
 async-recursion = "1.1.1"
 futures = "0.3.30"
+manganis = "0.2.2"
 
 [features]
-default = [] # "server"
+default = ["server"] # "server"
 server = ["axum", "tokio", "dioxus-fullstack/axum", "prisma-client-rust"]
 web = ["dioxus-web"]
 

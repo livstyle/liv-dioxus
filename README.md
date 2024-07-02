@@ -15,4 +15,6 @@ cargo prisma migrate dev
 cargo prisma generate
 rm -rf dist && dx build --release --features web
 cargo run --release --features server
+
+dx serve --platform fullstack --watch
 ```

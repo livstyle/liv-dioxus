@@ -10,7 +10,11 @@ pub fn Main() -> Element {
     let mut amount = use_signal(|| 0);
     rsx! {
         div {
-            h2 { "请输入金额" }
+            class: "ml-4 flex flex-col items-center justify-center h-screen",
+            h2 { 
+                class: "text-2xl font-bold mb-4 text-red-500",
+                "请输入金额" 
+            }
             input {
                 value: {amount},
                 oninput: move |evt| {
@@ -27,6 +31,7 @@ pub fn Main() -> Element {
             }
             br {}
             button {
+                class: "bg-orange-100 rounded-md",
                 onclick: move |_| async move {
                     // 这里应该调用支付接口
                     println!("支付 {} 元", amount);

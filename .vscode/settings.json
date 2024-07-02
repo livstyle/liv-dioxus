@@ -1,5 +1,6 @@
 {
-    "cSpell.words": [
-        "Cbor"
-    ]
+    "tailwindCSS.experimental.classRegex": ["class: \"(.*)\""],
+    "tailwindCSS.includeLanguages": {
+        "rust": "html"
+    },
 }

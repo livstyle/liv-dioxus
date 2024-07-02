@@ -16,6 +16,7 @@ use dioxus_fullstack::prelude::*;
 
 mod npay;
 
+const _STYLE: &str = manganis::mg!(file("assets/tailwind.css"));
 
 pub struct AppStateE<T> {
     client: Arc<T>,
@@ -68,7 +69,7 @@ fn main() {
                     ;
     
                 // run it
-                let addr = std::net::SocketAddr::from(([127, 0, 0, 1], 7000));
+                let addr = std::net::SocketAddr::from(([0, 0, 0, 0], 7000));
                 let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
     
                 axum::serve(listener, app.into_make_service())
@@ -106,6 +107,7 @@ fn Home() -> Element {
             "Go to blog"
         }
         div {
+            class: "text-gray-400 body-font",
             h1 { "High-Five counter: {count}" }
             button { onclick: move |_| count += 1, "Up high!" }
             button { onclick: move |_| count -= 1, "Down low!" }
@@ -138,4 +140,19 @@ async fn get_server_data() -> Result<String, ServerFnError> {
     let headers: axum::http::HeaderMap = extract().await?;
     println!("{:?}", headers[axum::http::header::USER_AGENT]);
     Ok("Hello from the server!".to_string())
+}
+
+
+#[server(name=PayAgent, endpoint="mobile/pay_agent", encoding="getjson")]
+pub async fn pay_agent() -> Result<String, ServerFnError> {
+    let headers: axum::http::HeaderMap = extract().await?;
+    // println!("{:?}", headers);
+    println!("USER_AGENT ===> {:?}", headers[axum::http::header::USER_AGENT]);
+
+    // redirect to the real page
+    let url = "https://www.baidu.com";
+    let response = axum::response::Redirect::temporary(url);
+    // Ok(response.into_response().body().await.unwrap())
+
+    Ok("{\"a\":1}".to_string())
 }

@@ -16,18 +16,26 @@ use dioxus_fullstack::prelude::*;
 
 mod npay;
 
+use npay::view::LivPay;
+
 const _STYLE: &str = manganis::mg!(file("assets/tailwind.css"));
 
 pub struct AppStateE<T> {
     client: Arc<T>,
 }
 
-#[derive(Clone, Routable, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Routable, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[rustfmt::skip]
 enum Route {
     #[route("/")]
     Home {},
     #[route("/blog/:id")]
     Blog { id: i32 },
+    #[route("/liv_pay?:code&:state")]
+    LivPay { 
+        code: String,
+        state: String,
+    },
 }
 
 #[cfg(feature = "server")]
@@ -48,6 +56,7 @@ fn main() {
         use axum::response::Html;
         use axum::extract::{State, Extension};
         use axum::Json;
+        use crate::api::*;
 
         tokio::runtime::Runtime::new()
             .unwrap()
@@ -56,11 +65,9 @@ fn main() {
                 let app_state = AppState {
                     db: Arc::new(Mutex::new(prisma_client)),
                 };
-
                 // build our application with some routes
                 let app = Router::new()
-                    // .with_state(app_state)
-                    // Server side render the application, serve static assets, and register server functions
+                    .route("/redirect", get(redirect))
                     .serve_dioxus_application(ServeConfig::builder().build(), || {
                         VirtualDom::new(App)
                     })

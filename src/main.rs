@@ -27,8 +27,11 @@ pub struct AppStateE<T> {
 #[derive(Routable, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 #[rustfmt::skip]
 enum Route {
-    #[route("/")]
-    Home {},
+    #[route("/?:code&:state")]
+    Home {
+        code: String,
+        state: String,
+    },
     #[route("/blog/:id")]
     Blog { id: i32 },
     #[route("/liv_pay?:code&:state")]
@@ -96,13 +99,13 @@ fn App() -> Element {
 #[component]
 fn Blog(id: i32) -> Element {
     rsx! {
-        Link { to: Route::Home {}, "Go to counter" }
+        Link { to: Route::Home {code: "1212".to_owned(), state: "123123".to_owned()}, "Go to counter" }
         "Blog post {id}"
     }
 }
 
 #[component]
-fn Home() -> Element {
+fn Home(code: ReadOnlySignal<String>, state: ReadOnlySignal<String>) -> Element {
     let mut count = use_signal(|| 0);
     let mut text = use_signal(|| String::from("..."));
 
@@ -112,6 +115,13 @@ fn Home() -> Element {
                 id: count()
             },
             "Go to blog"
+        }
+        br {}
+        div {
+            class: "flex flex-col items-center justify-center min-h-screen py-2",
+            h1 { class: "text-4xl font-bold", "Dioxus Fullstack" }
+            div { class: "w-full max-w-xs", "{code}" }
+            div { class: "w-full max-w-xs", "{state}" }
         }
         div {
             class: "text-gray-400 body-font",
@@ -129,8 +139,10 @@ fn Home() -> Element {
                 "Get Server Data"
             }
             p { "Server data: {text}"}
-            npay::view::Main {}
+            npay::view::Main { code, state }
         }
+
+        Link { to: Route::LivPay {code: "1212".to_owned(), state: "123123".to_owned()}, "Go to LivPay" }
     }
 }
 

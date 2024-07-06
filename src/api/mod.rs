@@ -20,8 +20,11 @@ pub async fn redirect(Extension(state): Extension<AppState>, headers: HeaderMap)
     let is_weixin = agent.contains("Weixin");
     
     if is_weixin {
-        let redirect_uri = "https://sh.livstyle.cn/liv_pay";
-        Redirect::to(format!("https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri={}&response_type=code&scope=snsapi_base&state=WEIXIN#wechat_redirect", "wxc36eb8c96f92fefe", redirect_uri).as_str())
+        // let redirect_uri = "https://sh.livstyle.cn/";
+        let redirect_uri = "https%3A%2F%2Fsh.livstyle.cn%2F";
+        let uri = format!("https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri={}&response_type=code&scope=snsapi_base&state=WEIXIN#wechat_redirect", "wxc36eb8c96f92fefe", redirect_uri);
+        println!("redirect to {}", uri.clone());
+        Redirect::to(uri.as_str())
     } else {
         let is_ali = agent.contains("Alipay");
         if is_ali {
@@ -31,3 +34,4 @@ pub async fn redirect(Extension(state): Extension<AppState>, headers: HeaderMap)
         }
     }
 }
+

@@ -549,16 +549,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "console_error_panic_hook"
-version = "0.1.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a06aeb73f470f66dcdbf7223caeebb85984942f22f1adb2a088cf9668146bbbc"
-dependencies = [
- "cfg-if",
- "wasm-bindgen",
-]
-
-[[package]]
 name = "const_format"
 version = "0.2.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -822,8 +812,10 @@ dependencies = [
  "dioxus-hooks",
  "dioxus-hot-reload",
  "dioxus-html",
+ "dioxus-liveview",
  "dioxus-router",
  "dioxus-signals",
+ "dioxus-ssr",
  "serde",
 ]
 
@@ -996,6 +988,8 @@ version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cc68a22e33562317b40ccc7b2d140017e510745c5d7e062e911c6a4f9042e4b1"
 dependencies = [
+ "dioxus-core",
+ "dioxus-html",
  "js-sys",
  "md5",
  "sledgehammer_bindgen",
@@ -1019,6 +1013,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "dioxus-liveview"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2dc132aacc3eb3d11db8f20afa5f3cfc74147374cc41285488083476a0ed1f17"
+dependencies = [
+ "axum",
+ "dioxus-cli-config",
+ "dioxus-core",
+ "dioxus-hot-reload",
+ "dioxus-html",
+ "dioxus-interpreter-js",
+ "futures-channel",
+ "futures-util",
+ "generational-box",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+ "slab",
+ "thiserror",
+ "tokio",
+ "tokio-stream",
+ "tokio-util",
+ "tracing",
+]
+
+[[package]]
 name = "dioxus-router"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1028,6 +1048,8 @@ dependencies = [
  "dioxus-fullstack",
  "dioxus-lib",
  "dioxus-router-macro",
+ "dioxus-ssr",
+ "tokio",
  "tracing",
  "url",
  "urlencoding",
@@ -1103,8 +1125,6 @@ version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a75cfbe115b193a05c649a80a54a90a6bdd88779694a617daf27d287d6fb944f"
 dependencies = [
- "async-trait",
- "console_error_panic_hook",
  "dioxus-core",
  "dioxus-html",
  "dioxus-interpreter-js",
@@ -1114,7 +1134,6 @@ dependencies = [
  "js-sys",
  "rustc-hash",
  "serde",
- "serde-wasm-bindgen",
  "serde_json",
  "tracing",
  "wasm-bindgen",
@@ -3937,17 +3956,6 @@ checksum = "f3a1a3341211875ef120e117ea7fd5228530ae7e7036a779fdc9117be6b3282c"
 dependencies = [
  "ordered-float",
  "serde",
-]
-
-[[package]]
-name = "serde-wasm-bindgen"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f3b143e2833c57ab9ad3ea280d21fd34e285a42837aeb0ee301f4f41890fa00e"
-dependencies = [
- "js-sys",
- "serde",
- "wasm-bindgen",
 ]
 
 [[package]]

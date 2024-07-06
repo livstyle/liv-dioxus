@@ -14,6 +14,14 @@ pub async fn user() -> Result<String, ServerFnError> {
     Ok("wwww".to_string())
 }
 
+
+#[server(name=WXPaymentCallback, endpoint="pay/wx_callback")]
+pub async fn wx_callback() -> Result<String, ServerFnError> {
+    let headers: axum::http::HeaderMap = extract().await?;
+    println!("{:?}", headers);
+    Ok("wwww".to_string())
+}
+
 // #[server(name=PayAgent, endpoint="mobile/pay_agent", encoding="getjson")]
 // pub async fn pay_agent() -> Result<String, ServerFnError> {
 //     let headers: axum::http::HeaderMap = extract().await?;

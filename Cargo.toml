@@ -17,7 +17,7 @@ dioxus = { version = "0.5", features = ["fullstack", "router"] }
 dioxus-fullstack = { version = "0.5.2" }
 
 
-dioxus-web = { version = "0.5", features = ["hydrate"], optional = true }
+dioxus-web = { version = "0.5", default-features = false, features = ["hydrate"], optional = true }
 
 axum = { version = "0.7.5", optional = true }
 tokio = { version = "1.38.0", features = ["full"], optional = true }
@@ -38,7 +38,7 @@ manganis = "0.2.2"
 
 [features]
 default = [] # "server"
-server = ["axum", "tokio", "dioxus-fullstack/axum", "prisma-client-rust"]
+server = ["axum", "tokio", "dioxus-fullstack/axum", "dioxus/axum", "prisma-client-rust"]
 web = ["dioxus-web"]
 
 

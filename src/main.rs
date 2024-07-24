@@ -8,6 +8,8 @@ mod api;
 
 use std::{marker::PhantomData, sync::{Arc}};
 
+use anyhow::Context;
+
 #[cfg(feature = "server")]
 use tokio::sync::Mutex;
 
@@ -18,7 +20,7 @@ mod npay;
 
 use npay::view::LivPay;
 
-const _STYLE: &str = manganis::mg!(file("assets/tailwind.css"));
+// const _STYLE: &str = manganis::mg!(file("assets/tailwind.css"));
 
 pub struct AppStateE<T> {
     client: Arc<T>,
@@ -52,6 +54,7 @@ fn main() {
     #[cfg(feature = "web")]
     // Hydrate the application on the client
     dioxus_web::launch::launch_cfg(App, dioxus_web::Config::new().hydrate(true));
+    // launch(App);
 
     #[cfg(feature = "server")]
     {
@@ -70,6 +73,7 @@ fn main() {
                 };
                 // build our application with some routes
                 let app = Router::new()
+                    .route("/scan_code", get(scan_code))
                     .route("/redirect", get(redirect))
                     .serve_dioxus_application(ServeConfig::builder().build(), || {
                         VirtualDom::new(App)
@@ -142,7 +146,7 @@ fn Home(code: ReadOnlySignal<String>, state: ReadOnlySignal<String>) -> Element 
             npay::view::Main { code, state }
         }
 
-        Link { to: Route::LivPay {code: "1212".to_owned(), state: "123123".to_owned()}, "Go to LivPay" }
+        Link { to: Route::LivPay {code: code(), state: state()}, "Go to LivPay" }
     }
 }
 
@@ -163,15 +167,22 @@ async fn get_server_data() -> Result<String, ServerFnError> {
 
 
 #[server(name=PayAgent, endpoint="mobile/pay_agent", encoding="getjson")]
-pub async fn pay_agent() -> Result<String, ServerFnError> {
+pub async fn pay_agent() -> Result<(), ServerFnError> {
     let headers: axum::http::HeaderMap = extract().await?;
     // println!("{:?}", headers);
     println!("USER_AGENT ===> {:?}", headers[axum::http::header::USER_AGENT]);
-
+    
     // redirect to the real page
-    let url = "https://www.baidu.com";
-    let response = axum::response::Redirect::temporary(url);
-    // Ok(response.into_response().body().await.unwrap())
+    let server_context_ = server_context();
 
-    Ok("{\"a\":1}".to_string())
+    server_context_.response_parts_mut().unwrap().headers.insert(
+         axum::http::header::LOCATION,
+          axum::http::HeaderValue::from_static("https://www.baidu.com")
+    );
+    server_context_.response_parts_mut().unwrap().status = axum::http::StatusCode::FOUND;
+
+    println!("server_context_.response_parts().unwrap().status ===> {:?}", server_context_.response_parts().unwrap().status);
+    println!("server_context_.response_parts().unwrap().headers ===> {:?}", server_context_.response_parts().unwrap().headers);
+
+    Ok(())
 }

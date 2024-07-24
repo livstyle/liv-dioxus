@@ -15,7 +15,7 @@ use serde::{Deserialize, Serialize};
 use crate::AppState;
 
 #[cfg(feature="server")]
-pub async fn redirect(Extension(state): Extension<AppState>, headers: HeaderMap)-> axum::response::Redirect {
+pub async fn scan_code(Extension(state): Extension<AppState>, headers: HeaderMap)-> axum::response::Redirect {
     let agent = headers.get("User-Agent").unwrap().to_str().unwrap();
     let is_weixin = agent.contains("Weixin");
     
@@ -33,5 +33,13 @@ pub async fn redirect(Extension(state): Extension<AppState>, headers: HeaderMap)
             Redirect::to(format!("https://www.livstyle.cn").as_str())
         }
     }
+}
+
+#[cfg(feature="server")]
+pub async fn redirect(Extension(state): Extension<AppState>, headers: HeaderMap)-> axum::response::Redirect {
+    let agent = headers.get("User-Agent").unwrap().to_str().unwrap();
+    let is_weixin = agent.contains("Weixin");
+    
+    Redirect::to(format!("https://sh.livstyle.cn/").as_str())
 }
 

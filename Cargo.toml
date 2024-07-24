@@ -37,8 +37,8 @@ futures = "0.3.30"
 manganis = "0.2.2"
 
 [features]
-default = [] # "server"
-server = ["axum", "tokio", "dioxus-fullstack/axum", "dioxus/axum", "prisma-client-rust"]
+default = ["server"] # "server"
+server = ["axum", "tokio", "dioxus-fullstack/axum", "dioxus/axum", "prisma-client-rust"]  # 
 web = ["dioxus-web"]
 
 

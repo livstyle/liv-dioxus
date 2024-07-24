@@ -167,7 +167,115 @@ model GoodsCategory {
 model PaymentRecord {
   id          BigInt            @id @default(autoincrement())
   amount      BigInt            @default(0)  // 单位是分
+
+  @@map("payment_records")
 }
 
 /// 商品表 BigInt
 // model Goods 
+
+model Customer {
+  id          BigInt            @id @default(autoincrement())
+  name        String?           @unique
+  email       String?
+  password    String?
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+  deleted     Boolean           @default(false)
+  phone       String? // 手機號碼
+  address     String? // 地址
+  avatar      String? // 個人頭像
+  gender      Int? // 性別
+  birthday    DateTime? // 生日
+  third_ids   String[] // 第三方登錄id
+
+  
+  GoodsClickRecord GoodsClickRecord[]
+
+
+  @@map("customer")
+}
+
+// 点击商品跳转转到京东小程序的记录表
+model GoodsClickRecord {
+  id          BigInt            @id @default(autoincrement())
+  goods_id    BigInt            @default(0)  // 商品id
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+  deleted     Boolean           @default(false)
+  customer_id BigInt // 顾客id
+  url         String? // 跳转链接
+  type        Int? // 类型
+  goods_name  String? // 商品名称
+  goods_price BigInt? // 商品价格
+  goods_img   String? // 商品图片
+  @@map("goods_click_records")
+
+  customer    Customer @relation(fields: [customer_id], references: [id])
+}
+
+
+model Goods {
+  id          BigInt            @id @default(autoincrement())
+  name        String?           @unique
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+  deleted     Boolean           @default(false)
+  price       BigInt? // 价格
+  main_imgs   String[] // 主图
+  detail_images String[] // 详情图
+  description String? // 描述
+  category_id BigInt? // 类目id
+  brand_id    BigInt? // 品牌id
+
+  GoodsAct GoodsAct[]
+
+  @@map("goods")
+  
+}
+
+model Brand {
+  id          BigInt            @id @default(autoincrement())
+  name        String?           @unique
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+  deleted     Boolean           @default(false)
+  @@map("brands")
+}
+
+
+// 商品活动推广记录表 每个活动记录绑定一个商品
+model GoodsAct {
+  id          BigInt            @id @default(autoincrement())
+  act_name    String?           
+  act_type    String            @default("DISCOUNT_COUPON") // 活动类型 ; DISCOUNT_COUPON:优惠券; 
+  goods_id    BigInt            @default(0)  // 商品id
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+  deleted     Boolean           @default(false)
+  act_price   Float?  //  商品价格
+  act_img     String? // 活动图片
+  goods       Goods @relation(fields: [goods_id], references: [id])
+
+  act_meta   String? // 活动元数据
+  act_status String @default("NOT_STARTED") // 活动状态 ; NOT_STARTED:未开始; IN_PROGRESS:进行中; FINISHED:已结束; EXPIRED:已过期
+  act_start  DateTime? // 活动开始时间
+  act_end    DateTime? // 活动结束时间
+  act_desc   String? // 活动描述
+  act_url    String? // 活动链接
+  act_code   String? // 活动码
+  act_limit  Int? // 活动限制
+  act_count  Int? // 活动数量
+
+
+  @@map("goods_act")
+
+}
+
+
+

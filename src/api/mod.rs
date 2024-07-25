@@ -31,7 +31,7 @@ pub async fn scan_code(Extension(state): Extension<AppState>, headers: HeaderMap
             Redirect::to(format!("https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id={}&scope=auth_user&redirect_uri={}", "", "").as_str())
         } else {
             Redirect::to(format!("https://www.livstyle.cn").as_str())
-        }
+        } // https://sh.livstyle.cn/jf_callback
     }
 }
 

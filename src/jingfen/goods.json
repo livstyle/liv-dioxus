@@ -1,0 +1,70 @@
+{
+  "jd_union_open_goods_bigfield_query_responce": {
+    "code": "0",
+    "queryResult": {
+      "code": 200,
+      "data": [
+        {
+          "baseBigFieldInfo": {
+            "propCode": "",
+            "propGroups": "[{\"atts\":[{\"attDictUrl\":\"\",\"attId\":18785,\"attName\":\"总净含量\",\"attType\":\"0\",\"attVals\":[{\"attValId\":0,\"attValName\":\"100g\"}],\"categoryGroupAttId\":\"215250\",\"inputType\":10,\"sort\":0,\"vals\":[\"100g\"]},{\"attDictUrl\":\"\",\"attId\":19577,\"attName\":\"产品（注册/备案）名称\",\"attType\":\"0\",\"attVals\":[{\"attValName\":\"丁家宜男士劲爽保湿露\"}],\"categoryGroupAttId\":\"238205\",\"inputType\":3,\"sort\":3,\"vals\":[\"丁家宜男士劲爽保湿露\"]},{\"attDictUrl\":\"\",\"attId\":15271,\"attName\":\"批准文号/备案编号\",\"attType\":\"0\",\"attVals\":[{\"attValName\":\"苏G妆网备字2023007344\"}],\"categoryGroupAttId\":\"178546\",\"inputType\":3,\"sort\":50,\"vals\":[\"苏G妆网备字2023007344\"]},{\"attDictUrl\":\"\",\"attId\":15270,\"attName\":\"是否特殊化妆品\",\"attType\":\"0\",\"attVals\":[{\"attValId\":156367,\"attValName\":\"非特殊化妆品\",\"orderSort\":2}],\"categoryGroupAttId\":\"178541\",\"inputType\":1,\"sort\":20,\"vals\":[\"非特殊化妆品\"]},{\"attDictUrl\":\"\",\"attId\":4411,\"attName\":\"产品产地\",\"attType\":\"0\",\"attVals\":[{\"attValId\":34687,\"attValName\":\"中国大陆\",\"orderSort\":975}],\"categoryGroupAttId\":\"193828\",\"inputType\":2,\"sort\":1,\"vals\":[\"中国大陆\"]},{\"attDictUrl\":\"\",\"attId\":2284,\"attName\":\"保质期\",\"attType\":\"0\",\"attVals\":[{\"attValName\":\"4年\"}],\"categoryGroupAttId\":\"246053\",\"inputType\":3,\"sort\":0,\"vals\":[\"4年\"]}],\"groupId\":1,\"groupName\":\"主体\",\"sort\":1}]",
+            "wareQD": "丁家宜男士劲爽保湿露100ml",
+            "wdis": "<div cssurl='//sku-market-gw.jd.com/css/pc/100009777161.css?t=1721126963786'></div><div id='zbViewModulesH'  value='13858'></div><input id='zbViewModulesHeight' type='hidden' value='13858'/><div skudesign=\"100010\"></div><div class=\"ssd-module-wrap\" >\n            <div class=\"ssd-module M16968482600911 animate-M16968482600911\" data-id=\"M16968482600911\">\n        \n</div>\n<div class=\"ssd-module M17201770300181 animate-M17201770300181\" data-id=\"M17201770300181\">\n        \n</div>\n<div class=\"ssd-module M16968482604742 animate-M16968482604742\" data-id=\"M16968482604742\">\n        \n</div>\n<div class=\"ssd-module M16968482607813 animate-M16968482607813\" data-id=\"M16968482607813\">\n        \n</div>\n<div class=\"ssd-module M16968482613094 animate-M16968482613094\" data-id=\"M16968482613094\">\n        \n</div>\n<div class=\"ssd-module M16968482616655 animate-M16968482616655\" data-id=\"M16968482616655\">\n        \n</div>\n<div class=\"ssd-module M16968482621127 animate-M16968482621127\" data-id=\"M16968482621127\">\n        \n</div>\n<div class=\"ssd-module M16968482624548 animate-M16968482624548\" data-id=\"M16968482624548\">\n        \n</div>\n<div class=\"ssd-module M16968482630539 animate-M16968482630539\" data-id=\"M16968482630539\">\n        \n</div>\n<div class=\"ssd-module M169684826348710 animate-M169684826348710\" data-id=\"M169684826348710\">\n        \n</div>\n<div class=\"ssd-module M169684826385811 animate-M169684826385811\" data-id=\"M169684826385811\">\n        \n</div>\n<div class=\"ssd-module M169684826417212 animate-M169684826417212\" data-id=\"M169684826417212\">\n        \n</div>\n<div class=\"ssd-module M169684826462513 animate-M169684826462513\" data-id=\"M169684826462513\">\n        \n</div>\n<div class=\"ssd-module M169684826493714 animate-M169684826493714\" data-id=\"M169684826493714\">\n        \n</div>\n\n    </div>\n<!-- 2024-07-05 06:57:21 --> "
+          },
+          "categoryInfo": {
+            "cid1": 1316,
+            "cid1Name": "美妆护肤",
+            "cid2": 1381,
+            "cid2Name": "面部护肤",
+            "cid3": 1391,
+            "cid3Name": "乳液/面霜"
+          },
+          "detailImages": "http://img30.360buyimg.com/sku/jfs/t1/244555/5/14285/81374/6687c858Ff4bc82dc/a431c85d96daf752.jpg,http://img30.360buyimg.com/sku/jfs/t1/219576/6/33766/341253/666a9758Fa832855f/1d55a30044cb7bbd.jpg,http://img30.360buyimg.com/sku/jfs/t1/221496/35/35271/101767/6523d981F0b62e2b7/f726cd4a4cd38613.jpg,http://img30.360buyimg.com/sku/jfs/t1/96880/8/47028/159867/6523d982F2a582d0f/61da9c1316a0175c.jpg,http://img30.360buyimg.com/sku/jfs/t1/184566/19/40503/107101/6537babbF729705f2/2ec6edc407318b37.jpg,http://img30.360buyimg.com/sku/jfs/t1/133335/10/37903/197116/6523d982F472fb202/764e2884405909a4.jpg,http://img30.360buyimg.com/sku/jfs/t1/189994/24/37494/39589/6523d981Fb5c14f14/b4346fa30c3fd3b8.jpg,http://img30.360buyimg.com/sku/jfs/t1/174528/26/34441/119494/6523d982Fb044bb67/ebae54e5ed5877d5.jpg,http://img30.360buyimg.com/sku/jfs/t1/218501/33/27309/41504/6523d981F2e35382d/232d893c8a728adf.jpg,http://img30.360buyimg.com/sku/jfs/t1/194482/38/39783/31834/6523d981Fe2af5374/6e606f5d43da0da6.jpg,http://img30.360buyimg.com/sku/jfs/t1/180037/40/40433/50895/6523d981F8153e6f3/2840a8b6d51ff10b.jpg,http://img30.360buyimg.com/sku/jfs/t1/100979/26/36632/33366/6523d981F0144ead6/b35e60c93a376032.jpg,http://img30.360buyimg.com/sku/jfs/t1/6653/20/26282/109942/6523d982Feedb60c2/2bc1a5934ceb9177.jpg,http://img30.360buyimg.com/sku/jfs/t1/124744/13/34946/28727/6523d981F21300b4f/0fbbbe2c9110875b.jpg",
+          "imageInfo": {
+            "imageList": [
+              {
+                "url": "https://img14.360buyimg.com/pop/jfs/t1/39718/22/23053/135225/669725acF5beec25e/8e3f28d653a0c7ff.jpg"
+              },
+              {
+                "url": "https://img14.360buyimg.com/pop/jfs/t1/151565/17/38887/37057/6537d02cFfd6d54a5/8498e0a5fc7af7a2.jpg"
+              },
+              {
+                "url": "https://img14.360buyimg.com/pop/jfs/t1/232688/19/709/97920/6537d034Ffd3f8ae6/4c3e392669ed7ee5.jpg"
+              },
+              {
+                "url": "https://img14.360buyimg.com/pop/jfs/t1/238208/18/19893/81746/6687c839Fa3622967/701f72c76f4a6b1d.jpg"
+              },
+              {
+                "url": "https://img14.360buyimg.com/pop/jfs/t1/202959/36/32118/36449/64267a9eFdb91ede5/14899190c0f5d46d.jpg"
+              },
+              {
+                "url": "https://img14.360buyimg.com/pop/jfs/t1/230128/22/7357/90702/65796f14F4a076d61/5da05215b6261f0b.jpg"
+              },
+              {
+                "url": "https://img14.360buyimg.com/pop/jfs/t1/197887/11/20684/86845/622f011bEeedee2b5/75edfa66e260cb85.jpg"
+              },
+              {
+                "url": "https://img14.360buyimg.com/pop/jfs/t1/120674/20/23950/124751/622f010eEe6617600/588e6e24980b7ea9.jpg"
+              },
+              {
+                "url": "https://img14.360buyimg.com/pop/jfs/t1/99720/23/19874/112857/61c6d225Ef568a857/14b2bc7de1a3a8f3.jpg"
+              },
+              {
+                "url": "https://img14.360buyimg.com/pop/jfs/t1/201001/40/20273/110401/61c6d226Ee2acad31/ed20d2ce3a45066f.jpg"
+              }
+            ]
+          },
+          "itemId": "NVJ8HLibkfFJgq7dy7BRbUPZ_3ZXBbQwKWkvr2FwmGE",
+          "mainSkuId": 100008617697,
+          "owner": "g",
+          "productId": 100009777161,
+          "skuId": 100009777161,
+          "skuName": "丁家宜（TJOY）男士劲爽保湿润肤精华露乳液润肤面霜100g（补水保湿男士护肤品）",
+          "skuStatus": 1
+        }
+      ],
+      "message": "success",
+      "requestId": "o_0b725239_lyzktire_158595582"
+    }
+  }
+}

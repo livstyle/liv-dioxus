@@ -278,4 +278,31 @@ model GoodsAct {
 }
 
 
+model JdAct {
+  id          BigInt            @id @default(autoincrement())
+  act_name    String?           
+  act_type    String            @default("DISCOUNT_COUPON") // 活动类型 ; DISCOUNT_COUPON:优惠券; 
+  goods_id    BigInt            @default(0)  // 商品id
+  goods_name  String?           // 商品名称
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  deleted_at  DateTime?
+  deleted     Boolean           @default(false)
+  act_price   Float?        //  商品价格
+  act_img     String?       // 活动图片
+
+  act_meta   String?        // 活动元数据
+  act_status String             @default("NOT_STARTED") // 活动状态 ; NOT_STARTED:未开始; IN_PROGRESS:进行中; FINISHED:已结束; EXPIRED:已过期
+  act_start  DateTime?      // 活动开始时间
+  act_end    DateTime?      // 活动结束时间
+  act_desc   String?        // 活动描述
+  act_url    String?        // 活动链接
+  act_code   String?        // 活动码
+  act_limit  Int?           // 活动限制
+  act_count  Int?           // 活动数量
+
+
+  @@map("jd_act")
+}
+
 

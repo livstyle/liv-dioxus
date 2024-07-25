@@ -6,6 +6,8 @@ mod db;
 #[cfg(feature = "server")]
 mod api;
 
+mod jingfen;
+
 use std::{marker::PhantomData, sync::{Arc}};
 
 use anyhow::Context;
@@ -63,6 +65,7 @@ fn main() {
         use axum::extract::{State, Extension};
         use axum::Json;
         use crate::api::*;
+        use crate::jingfen::*;
 
         tokio::runtime::Runtime::new()
             .unwrap()
@@ -75,6 +78,7 @@ fn main() {
                 let app = Router::new()
                     .route("/scan_code", get(scan_code))
                     .route("/redirect", get(redirect))
+                    .route("/jf_callback", get(jf_callback))
                     .serve_dioxus_application(ServeConfig::builder().build(), || {
                         VirtualDom::new(App)
                     })
